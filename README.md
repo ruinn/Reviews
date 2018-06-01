@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/ruinn/Booking
+  - https://github.com/ruinn/Header
+  - https://github.com/ruinn/Reviews
+  - https://github.com/ruinn/Overview
 
 ## Table of Contents
 
@@ -18,6 +18,9 @@
 ## Usage
 
 > Some usage instructions
+- Users can see a snapshot of reviews for a particular hostel as they scroll down to the review section. Only couple of review snippets are shown (~5), users can see full review by clicking on the show more button
+- The average rating is shown on top of the Review section with the rating for top categerie
+
 
 ## Requirements
 
