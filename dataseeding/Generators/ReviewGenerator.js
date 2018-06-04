@@ -68,17 +68,17 @@ const generateReviewData = async rawData => {
     let allNewReviews = await Promise.all(allPromises);
     console.log('Added new reviews to database');
 
-    allPromises = [];
+    let allUserPromises = [];
     let allHostelPromises = [];
     allNewReviews.forEach(newReview => {
       let userId = newReview.user.toString();
-      allPromises.push(User.findById(userId));
+      allUserPromises.push(User.findById(userId));
 
       let hostelId = newReview.hostel.toString();
       allHostelPromises.push(Hostel.findById(hostelId));
     });
 
-    let allUsers = await Promise.all(allPromises);
+    let allUsers = await Promise.all(allUserPromises);
     allPromises = [];
     allUsers.forEach((userDoc, index) => {
       userDoc.reviews.push(allNewReviews[index]._id);

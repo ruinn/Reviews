@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const faker = require('faker');
 const { MONGO_URI } = require('../../config');
-var rawUsers = require('../JSONS/Users.json');
 // load User model
 const User = require('../Schema/User');
 
+let rawUsers;
 const getArrayOfUsers = (size = 50) => {
   let ans = [];
   const countryBank = [

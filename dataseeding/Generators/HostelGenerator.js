@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const { MONGO_URI } = require('../../config');
-let rawHostels = require('../JSONS/Hostels.json');
 const faker = require('faker');
 // load User model
 const Hostel = require('../Schema/Hostel');
 const featureBank = require('./ratingFeatureHelper');
+
+let rawHostels;
 
 const getFeatureRatingsArray = () => {
   let ans = [];
