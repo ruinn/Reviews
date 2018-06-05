@@ -5,9 +5,7 @@ const featureBank = [
   'Location',
   'Staff',
   'Security',
-  'Facilities'
+  'Facilities',
 ];
 
-module.exports = featureBank.map((feature, index) => {
-  return {feature: feature, featureId: index}
-})
+module.exports = featureBank.map((feature, index) => ({ feature, featureId: index }));

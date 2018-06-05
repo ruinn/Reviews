@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { MONGO_URI } = require('../../config');
 const faker = require('faker');
+const { MONGO_URI } = require('../../config');
 // load User model
 const Hostel = require('../Schema/Hostel');
 const featureBank = require('./ratingFeatureHelper');
@@ -8,39 +8,35 @@ const featureBank = require('./ratingFeatureHelper');
 let rawHostels;
 
 const getFeatureRatingsArray = () => {
-  let ans = [];
+  const ans = [];
   featureBank.forEach(({ feature, featureId }) => {
-    let rating =
-      Math.random() > 0.45
-        ? ~~(Math.random() * 3) + 8
-        : ~~(Math.random() * 5) + 6;
+    const rating =
+      Math.random() > 0.45 ? Math.floor(Math.random() * 3) + 8 : Math.floor(Math.random() * 5) + 6;
     ans.push({ feature, featureId, rating });
   });
   return ans;
 };
 
-const getAvgRating = arrOfRatings => {
-  var sum = 0;
-  for (var each of arrOfRatings) {
+const getAvgRating = (arrOfRatings) => {
+  let sum = 0;
+  arrOfRatings.forEach((each) => {
     sum += each.rating;
-  }
-  return Math.round(sum / arrOfRatings.length * 10) / 10;
+  });
+  return Math.round((sum / arrOfRatings.length) * 10) / 10;
 };
 
 const getArrayOfHostels = (size = 100) => {
-  let ans = [];
+  const ans = [];
 
-  for (var i = 0; i < size; i++) {
-    let hostel = {};
+  for (let i = 0; i < size; i++) {
+    const hostel = {};
     hostel.name = faker.random.arrayElement([
       faker.company.companyName(),
       faker.address.county(),
       faker.address.streetSuffix(),
-      faker.name.findName()
+      faker.name.findName(),
     ]);
-    hostel.created_at = new Date(
-      faker.date.between('1990-01-01', '2016-01-01')
-    );
+    hostel.created_at = new Date(faker.date.between('1990-01-01', '2016-01-01'));
     hostel.ratedFeatures = getFeatureRatingsArray();
 
     hostel.avgRating = getAvgRating(hostel.ratedFeatures);
@@ -62,8 +58,8 @@ async function generateHostelData(rawData) {
     console.log('Removed all old hostel collections');
 
     // Add new hostels to database
-    let allNewHostelPromises = [];
-    rawData.forEach(rawHostel => {
+    const allNewHostelPromises = [];
+    rawData.forEach((rawHostel) => {
       allNewHostelPromises.push(new Hostel(rawHostel).save());
     });
     await Promise.all(allNewHostelPromises);
@@ -77,7 +73,7 @@ async function generateHostelData(rawData) {
   }
 }
 
-module.exports = function(numOfHostels) {
+module.exports = function generateHostels(numOfHostels) {
   return new Promise(async (resolve, reject) => {
     try {
       rawHostels = getArrayOfHostels(numOfHostels);

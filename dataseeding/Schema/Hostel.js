@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const HostelSchema = new Schema({
   name: { type: String },
@@ -8,11 +9,11 @@ const HostelSchema = new Schema({
     {
       feature: { type: String },
       rating: { type: Number },
-      featureId: { type: Number }
-    }
+      featureId: { type: Number },
+    },
   ],
-  reviews: [Schema.Types.ObjectId],
-  avgRating: { type: Number }
+  reviews: [{ type: Schema.Types.ObjectId, ref: 'review' }],
+  avgRating: { type: Number },
 });
 
-module.exports = Hostel = mongoose.model('hostel', HostelSchema);
+module.exports = mongoose.model('hostel', HostelSchema);

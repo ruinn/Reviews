@@ -3,8 +3,8 @@ const generateHostels = require('./HostelGenerator');
 const generateReviews = require('./ReviewGenerator');
 
 const NUM_OF_USERS = 100;
-const NUM_OF_HOSTELS = 200;
-const NUM_OF_REVIEWS = 30000;
+const NUM_OF_HOSTELS = 100;
+const NUM_OF_REVIEWS = 20000;
 
 console.log('DATABASE SEEDING...\n');
 console.log('TRYING TO SEED NEW USERS\n');

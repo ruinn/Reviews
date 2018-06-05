@@ -1,37 +1,38 @@
 const mongoose = require('mongoose');
 const faker = require('faker');
 const { MONGO_URI } = require('../../config');
-// load User model
 const User = require('../Schema/User');
 
 let rawUsers;
 const getArrayOfUsers = (size = 50) => {
-  let ans = [];
+  const ans = [];
   const countryBank = [
     'USA',
     'China',
     'Spain',
     'Australia',
     'Chile',
-    'Thailand'
+    'Thailand',
+    'South Korea',
+    'Canada',
+    'South Africa',
+    'Vietnam',
+    'Kazakhstan',
+    'Japan',
+    'Kenya',
   ];
 
-  for (var i = 0; i < size; i++) {
-    let user = {};
+  for (let i = 0; i < size; i++) {
+    const user = {};
     user.first_name = faker.name.firstName();
     user.last_name = faker.name.lastName();
     user.avatar = faker.image.avatar();
     user.username = faker.internet.userName();
-    user.age = 18 + ~~(Math.random() * 40);
+    user.age = 18 + Math.floor(Math.random() * 40);
     user.email = faker.internet.email();
-    user.status = faker.random.arrayElement([
-      'Female',
-      'Male',
-      'Mixed Group',
-      'Couple'
-    ]);
+    user.status = faker.random.arrayElement(['Female', 'Male', 'Mixed Group', 'Couple']);
     user.created_at = new Date(faker.date.between('2000-01-01', '2018-01-01'));
-    user.country = countryBank[~~(Math.random() * countryBank.length)];
+    user.country = countryBank[Math.floor(Math.random() * countryBank.length)];
     ans.push(user);
   }
 
@@ -39,6 +40,7 @@ const getArrayOfUsers = (size = 50) => {
 };
 
 async function generateUserDb(rawData) {
+  console.log('HERE');
   try {
     const db = await mongoose.connect(MONGO_URI);
     console.log('Connected to DB');
@@ -48,9 +50,9 @@ async function generateUserDb(rawData) {
     console.log('Removed all User collections');
 
     // ADDED NEW USERS TO DATABASE
-    let allPromises = [];
-    rawData.forEach(rawUser => {
-      var newUser = new User(rawUser);
+    const allPromises = [];
+    rawData.forEach((rawUser) => {
+      const newUser = new User(rawUser);
       allPromises.push(newUser.save());
     });
 
@@ -65,7 +67,7 @@ async function generateUserDb(rawData) {
   }
 }
 
-module.exports = function(numOfUsers) {
+module.exports = function generateUsers(numOfUsers) {
   return new Promise(async (resolve, reject) => {
     try {
       rawUsers = getArrayOfUsers(numOfUsers);
