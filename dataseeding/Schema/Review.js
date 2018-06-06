@@ -1,29 +1,31 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const ReviewSchema = new Schema({
   text: {
     type: String,
-    required: true
+    required: true,
   },
   created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  propertyResponse: {
-  },
+  propertyResponse: {},
   rate: {
-    type: Number
+    type: Number,
   },
   language: {
-    type: String
+    type: String,
   },
   hostel: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
+    ref: 'hostel',
   },
   user: {
-    type: Schema.Types.ObjectId
-  }
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+  },
 });
 
-module.exports = Review = mongoose.model('review', ReviewSchema);
+module.exports = mongoose.model('review', ReviewSchema);
