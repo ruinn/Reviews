@@ -13,7 +13,7 @@ const getArrayOfRawReviews = (size = 1000) => {
   for (let i = 0; i < size; i++) {
     const review = {};
     review.text = faker.lorem.paragraphs(faker.random.number({ min: 1, max: 2 }), '\n \r');
-    review.rate = Math.round(7 + (Math.random() * 3 * 10)) / 10;
+    review.rate = Math.round(7 + Math.random() * 3 * 10) / 10;
     review.language = faker.random.arrayElement(['ENG', 'ENG', 'ENG', 'ENG', 'OTH']);
     review.created_at = faker.date.between('2016-01-01', '2018-01-01');
     review.propertyResponse =

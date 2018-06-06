@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const mongoose = require('mongoose');
 const config = require('../config');
 require('../dataseeding/Schema/Review');
@@ -18,6 +19,8 @@ mongoose
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(__dirname, '../client/dist/')));
 
 app.get('/api/reviews/full/:hostelId', (req, res) => {
   // console.log('hostelId', req.params.hostelId);
