@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('../config');
@@ -15,6 +16,9 @@ mongoose
   .connect(config.MONGO_URI)
   .then(() => console.log('Connected to database'))
   .catch(err => console.log('Failed to connect to database:', err));
+
+// Allow CORS
+app.use(cors());
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -60,7 +64,8 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
         countryCount[country] = 1;
       }
     });
-    data.reviews = data.reviews.slice(0, 3);
+    data.totalReviewCount = data.reviews.length;
+    data.reviews = data.reviews.slice(0, 4);
     data.countryCount = countryCount;
     const orderedData = {};
     Object.keys(data)
@@ -69,7 +74,7 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
         orderedData[key] = data[key];
       });
 
-    res.send({ _id: '', name: '', ...orderedData });
+    res.send(orderedData);
   } catch (error) {
     res.status(404).json({ message: error });
   }
