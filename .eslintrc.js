@@ -3,6 +3,9 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
-    'no-plusplus': 'off'
+    'no-plusplus': 'off',
+  },
+  env: {
+    jest: true,
   },
 };
