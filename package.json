@@ -9,7 +9,8 @@
   },
   "scripts": {
     "seed": "node dataseeding/Generators/MasterGenerator.js",
-    "dev:server": "nodemon ./server/app"
+    "dev:server": "nodemon ./server/app",
+    "test": "jest --watch"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -23,6 +24,7 @@
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1"
+    "eslint-plugin-react": "^7.9.1",
+    "jest": "^23.1.0"
   }
 }
