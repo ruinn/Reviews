@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Top5Countries = ({ countries }) => (
-  <div>
+const Top5Countries = ({ countries }, index) => (
+  <div key={index}>
     {countries.map(([country, visit]) => (
-      <div>
+      <div key={country}>
         NAME: {country}, VISIT: {visit > 5 ? visit - (visit % 5) : 1}+
       </div>
     ))}
@@ -12,6 +12,11 @@ const Top5Countries = ({ countries }) => (
 );
 
 Top5Countries.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.string).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.array),
 };
+
+Top5Countries.defaultProps = {
+  countries: [],
+};
+
 export default Top5Countries;

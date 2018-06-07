@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class TheRestOfCountries extends Component {
-  render() {
-    return <div />;
-  }
-}
+const TheRestOfCountries = () => <div>The Rest</div>;
 
 export default TheRestOfCountries;

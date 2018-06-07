@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class RankedRating extends Component {
   constructor(props) {
@@ -9,26 +10,28 @@ class RankedRating extends Component {
     };
   }
 
-  // TODO: fix ranked features
   componentWillReceiveProps(nextProps) {
-    if (nextProps.rankedFeatures) {
-      this.setState({ rankedFeatures: nextProps.rankedFeatures });
-    }
+    this.setState({ rankedFeatures: nextProps.rankedFeatures });
   }
 
   render() {
     const { rankedFeatures } = this.state;
-    return <div>{rankedFeatures ? rankedFeatures.map(feature => <div>{feature}</div>) : null}</div>;
+    return rankedFeatures.map(each => (
+      <div key={each._id}>
+        <div>{each.feature}</div>
+        <div>{each.rating}</div>
+        <br />
+      </div>
+    ));
   }
 }
 
-// const RankedRating = ({ rankedFeatures }) => {
-//   console.log('rankedFeatures', rankedFeatures);
-//   // return rankedFeatures ? rankedFeatures.map(feature => <div>{feature}</div>) : null;
-//   return <div>haha</div>;
-// };
-
-// const RankedRating = () => <div>HAHA</div>;
+RankedRating.propTypes = {
+  rankedFeatures: PropTypes.arrayOf(PropTypes.shape({
+    feature: PropTypes.string,
+    rating: PropTypes.number,
+  })).isRequired,
+};
 
 const mapStateToProps = state => ({
   rankedFeatures: state.rankedFeatures,

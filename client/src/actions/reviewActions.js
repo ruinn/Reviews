@@ -4,7 +4,7 @@ import { FETCH_OVERVIEW_REVIEWS, GET_RANKED_FEATURES } from '../types';
 export const fetchOverviewReviews = hostelId => (dispatch) => {
   axios.get(`http://127.0.0.1:3004/api/reviews/overview/${hostelId}`).then((res) => {
     const { data } = res;
-    console.log('data', data);
+    // console.log('data', data);
 
     // rank rated features and eliminate features with low rating
     let { ratedFeatures } = data;

@@ -47,7 +47,7 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
     let data = await Hostel.findById(hostelId).populate({
       path: 'reviews',
       // options: { limit: 3, sort: { created_at: -1 } },
-      options: { sort: { created_at: -1 } },
+      options: { sort: { rate: -1 } },
       match: { created_at: { $gt: 0 } },
       select: 'text user rate created_at',
       populate: { path: 'user', select: 'username country -_id age status' },

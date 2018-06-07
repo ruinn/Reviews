@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { fetchOverviewReviews } from './actions/reviewActions';
 import WhoIsStaying from './components/WhoIsStaying/WhoIsStaying';
 import ReviewsAndRatings from './components/ReviewsAndRating/ReviewsAndRatings';
-import LatestReviews from './components/LatestReviews';
+import LatestReviews from './components/LatestReviews/LatestReviews';
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Sidebar />
         <WhoIsStaying />
         <ReviewsAndRatings />
         <LatestReviews />

@@ -25,18 +25,16 @@ class WhoIsStaying extends Component {
         });
 
         sortable.sort((a, b) => b[1] - a[1]);
-        console.log('sortable', sortable);
         return [
-          <Top5Countries countries={sortable.slice(0, 5)} />,
-          <TheRestOfCountries countries={sortable.slice(5)} />,
+          <Top5Countries key="top5countries" countries={sortable.slice(0, 5)} />,
+          <TheRestOfCountries key="theRestOfCountries" countries={sortable.slice(5)} />,
         ];
       }
       return null;
     };
-    console.log('this.props', this.props);
     return (
       <div>
-        <div>WHO'S STAYING</div>
+        <div>WHOS STAYING</div>
         {renderCountryFlags(this.state.countryCount)}
       </div>
     );

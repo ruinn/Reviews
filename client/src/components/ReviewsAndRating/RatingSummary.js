@@ -9,18 +9,20 @@ const RatingSummary = ({ avgRating, totalReviewCount }) => (
   </div>
 );
 
-const mapStateToProps = (state) => {
-  console.log('state', state);
-  return {
-    avgRating: state.overviewReviews.avgRating,
-    totalReviewCount: state.overviewReviews.totalReviewCount,
-  };
+RatingSummary.propTypes = {
+  avgRating: PropTypes.number,
+  totalReviewCount: PropTypes.number,
 };
 
-RatingSummary.propTypes = {
-  avgRating: PropTypes.number.isRequired,
-  totalReviewCount: PropTypes.number.isRequired,
+RatingSummary.defaultProps = {
+  avgRating: 0,
+  totalReviewCount: 0,
 };
+
+const mapStateToProps = ({ overviewReviews }) => ({
+  avgRating: overviewReviews.avgRating,
+  totalReviewCount: overviewReviews.totalReviewCount,
+});
 
 export default connect(
   mapStateToProps,
