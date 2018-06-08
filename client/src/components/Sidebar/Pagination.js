@@ -4,7 +4,10 @@ const Pagination = () => (
   <nav aria-label="...">
     <ul className="pagination">
       <li className="page-item disabled">
-        <span className="page-link">Previous</span>
+        <span className="page-link">First</span>
+      </li>
+      <li className="page-item">
+        <span className="page-link">&lt;</span>
       </li>
       <li className="page-item">
         <a className="page-link" href="/">
@@ -24,7 +27,12 @@ const Pagination = () => (
       </li>
       <li className="page-item">
         <a className="page-link" href="/">
-          Next
+          &gt;
+        </a>
+      </li>
+      <li className="page-item">
+        <a className="page-link" href="/">
+          Last
         </a>
       </li>
     </ul>
