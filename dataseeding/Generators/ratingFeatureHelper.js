@@ -8,4 +8,7 @@ const featureBank = [
   'Facilities',
 ];
 
-module.exports = featureBank.map((feature, index) => ({ feature, featureId: index }));
+module.exports = featureBank.map((feature, index) => ({
+  feature,
+  featureId: index,
+}));
