@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchOverviewReviews('5b16725b923e9e25353c330d');
+    this.props.fetchOverviewReviews('5b1a77d5180c7f989ed68a3b');
   }
 
   render() {
