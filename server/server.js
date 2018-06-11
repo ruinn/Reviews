@@ -25,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, '../client/dist/')));
+app.use(express.static(path.join(__dirname, '../public/')));
 
 app.get('/api/reviews/:hostelId/all', async (req, res) => {
   try {

@@ -10,18 +10,25 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   initialState,
   compose(
     applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  ),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById('reviews')
 );
+
+export default (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
