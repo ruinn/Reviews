@@ -10,7 +10,9 @@
   "scripts": {
     "seed": "node dataseeding/Generators/MasterGenerator.js",
     "dev:server": "nodemon ./server/app",
-    "dev:react": "webpack -d --watch"
+    "dev:react": "webpack -d --watch",
+    "build": "webpack -d --watch",
+    "start": "node ./server/server"
   },
   "dependencies": {
     "axios": "^0.18.0",
