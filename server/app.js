@@ -36,6 +36,8 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
     console.log('english?', english);
     const languageMatch = english === 'true' ? { language: 'ENG' } : {};
     console.log('languageMatch', languageMatch);
+
+    //default sortBy for 'newest
     let sortBy = { created_at: -1 };
     switch (req.query.sortBy) {
       case 'newest':
@@ -62,6 +64,7 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
     }
     console.log('hostelId', hostelId);
     console.log('pageNum', pageNum);
+    console.log('sortBy', sortBy);
 
     const reviews = await Review.aggregate([
       { $unwind: '$user' },
@@ -71,22 +74,22 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
           from: 'hostels',
           localField: 'hostel',
           foreignField: '_id',
-          as: 'hostelInfo',
-        },
+          as: 'hostelInfo'
+        }
       },
       { $unwind: '$hostelInfo' },
       {
         $match: {
-          'hostelInfo._id': mongoose.Types.ObjectId(hostelId),
-        },
+          'hostelInfo._id': mongoose.Types.ObjectId(hostelId)
+        }
       },
       {
         $lookup: {
           from: 'users',
           localField: 'user',
           foreignField: '_id',
-          as: 'userInfo',
-        },
+          as: 'userInfo'
+        }
       },
       { $unwind: '$userInfo' },
       {
@@ -98,7 +101,8 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
           language: { $push: '$language' },
           rate: { $push: '$rate' },
           age: { $push: '$userInfo.age' },
-        },
+          username: { $push: '$userInfo.username' }
+        }
       },
       { $unwind: '$age' },
       { $unwind: '$text' },
@@ -106,6 +110,7 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
       { $unwind: '$propertyResponse' },
       { $unwind: '$language' },
       { $unwind: '$rate' },
+      { $unwind: '$username' }
     ])
       .sort({ ...sortBy })
       .match({ ...languageMatch });
@@ -114,7 +119,10 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
 
     const startPoint = (pageNum - 1) * NUM_OF_REVIEWS_PER_PAGE;
     const endPoint = startPoint + NUM_OF_REVIEWS_PER_PAGE;
-    res.json({ total: reviews.length, reviewSnippet: reviews.slice(startPoint, endPoint) });
+    res.json({
+      total: reviews.length,
+      reviewSnippet: reviews.slice(startPoint, endPoint)
+    });
   } catch (error) {
     console.log('ERROR', error);
     res.json(error);
@@ -130,13 +138,13 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
       options: { sort: { rate: -1 } },
       match: { created_at: { $gt: 0 } },
       select: 'text user rate created_at',
-      populate: { path: 'user', select: 'username country -_id age status' },
+      populate: { path: 'user', select: 'username country -_id age status' }
     });
 
     data = data.toObject();
 
     const countryCount = {};
-    data.reviews.forEach((review) => {
+    data.reviews.forEach(review => {
       const { country } = review.user;
       if (countryCount[country]) {
         countryCount[country] += 1;
@@ -150,7 +158,7 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
     const orderedData = {};
     Object.keys(data)
       .sort()
-      .forEach((key) => {
+      .forEach(key => {
         orderedData[key] = data[key];
       });
 

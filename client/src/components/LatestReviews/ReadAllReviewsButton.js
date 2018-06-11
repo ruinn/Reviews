@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { openSidebarAndFetchFullReviews } from '../../actions/sidebarActions';
+import { openSidebarAndFetchFullReviews, openSidebar, fetchReviewsOnPage } from '../../actions/sidebarActions';
 
 class ReadAllReviewsButton extends Component {
   handleOnClick() {
-    console.log('clicked', this.props);
-    this.props.openSidebarAndFetchFullReviews(this.props.hostelId);
+    const { hostelId, isEnglish, sortBy } = this.props;
+    // this.props.openSidebarAndFetchFullReviews(hostelId, isEnglish, sortBy, 1);
+    this.props.fetchReviewsOnPage(1, hostelId, sortBy, isEnglish)
+    // this.props.openSidebar();
   }
 
   render() {
@@ -20,14 +22,16 @@ class ReadAllReviewsButton extends Component {
 
 ReadAllReviewsButton.propTypes = {
   openSidebarAndFetchFullReviews: PropTypes.func.isRequired,
-  hostelId: PropTypes.string.isRequired,
+  hostelId: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({
-  hostelId: state.overviewReviews._id || '',
+const mapStateToProps = ({ overviewReviews, sidebarReducer }) => ({
+  hostelId: overviewReviews._id || '',
+  isEnglish: sidebarReducer.isEnglish,
+  sortBy: sidebarReducer.sortBy
 });
 
 export default connect(
   mapStateToProps,
-  { openSidebarAndFetchFullReviews },
+  { openSidebarAndFetchFullReviews, openSidebar, fetchReviewsOnPage }
 )(ReadAllReviewsButton);
