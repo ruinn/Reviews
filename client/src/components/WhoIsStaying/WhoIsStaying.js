@@ -17,43 +17,55 @@ class WhoIsStaying extends Component {
   }
 
   render() {
-    const renderCountryFlags = (countryCount) => {
+    const renderCountryFlags = countryCount => {
       if (countryCount) {
         const sortable = [];
-        Object.keys(countryCount).forEach((key) => {
+        Object.keys(countryCount).forEach(key => {
           sortable.push([key, countryCount[key]]);
         });
 
         sortable.sort((a, b) => b[1] - a[1]);
         return [
-          <Top5Countries key="top5countries" countries={sortable.slice(0, 5)} />,
-          <TheRestOfCountries key="theRestOfCountries" countries={sortable.slice(5)} />,
+          <Top5Countries
+            key="top5countries"
+            countries={sortable.slice(0, 5)}
+          />,
+          <TheRestOfCountries
+            key="theRestOfCountries"
+            countries={sortable.slice(5)}
+          />
         ];
       }
       return null;
     };
     return (
-      <div>
-        <div>WHOS STAYING</div>
-        {renderCountryFlags(this.state.countryCount)}
+      <div id="whosStaying">
+        <div className="container">
+          <div className="header">
+            Who's staying? <span className="btn btn-sm btn-new">NEW</span>
+          </div>
+          <div className="row d-flex justify-content-around">
+            {renderCountryFlags(this.state.countryCount)}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 WhoIsStaying.propTypes = {
-  countryCount: PropTypes.objectOf(PropTypes.number),
+  countryCount: PropTypes.objectOf(PropTypes.number)
 };
 
 WhoIsStaying.defaultProps = {
-  countryCount: undefined,
+  countryCount: undefined
 };
 
 const mapStateToProps = state => ({
-  countryCount: state.overviewReviews.countryCount,
+  countryCount: state.overviewReviews.countryCount
 });
 
 export default connect(
   mapStateToProps,
-  {},
+  {}
 )(WhoIsStaying);

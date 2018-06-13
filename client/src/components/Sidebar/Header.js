@@ -2,7 +2,7 @@ import React from 'react';
 
 const SidebarHeader = () => (
   <div>
-    <h1>Reviews & Ratings</h1>
+    <h1 className="header">Reviews & Ratings</h1>
     <div>
       The rating percentage is calculated from customers who booked within the last 6 months. All
       ratings and reviews are based on the feedback and opinions of the customers who submitted them

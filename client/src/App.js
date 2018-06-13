@@ -25,7 +25,7 @@ class App extends Component {
         <ReviewsAndRatings />
         <LatestReviews />
       </div>
-    );
+    );s
   }
 }
 

@@ -5,7 +5,14 @@ import { fetchReviewsOnPage } from '../../actions/sidebarActions';
 class Pagination extends Component {
   render() {
     // state props
-    const { maxPageIndex, minPageIndex, currentPageIndex, hostelId, sortBy, isEnglish } = this.props;
+    const {
+      maxPageIndex,
+      minPageIndex,
+      currentPageIndex,
+      hostelId,
+      sortBy,
+      isEnglish
+    } = this.props;
     // action props
     const { fetchReviewsOnPage } = this.props;
 
@@ -13,12 +20,15 @@ class Pagination extends Component {
       let pagination = [];
       for (let i = minPageIndex; i <= maxPageIndex; i++) {
         let classname = 'page-item';
-        if (i=== currentPageIndex) {
+        if (i === currentPageIndex) {
           classname += ' active';
         }
         pagination.push(
           <li className={classname} key={i}>
-            <a className="page-link" onClick={() => fetchReviewsOnPage(i, hostelId, sortBy, isEnglish)}>
+            <a
+              className="page-link"
+              onClick={() => fetchReviewsOnPage(i, hostelId, sortBy, isEnglish)}
+            >
               {i}
             </a>
           </li>
@@ -27,17 +37,18 @@ class Pagination extends Component {
       return pagination;
     };
     return (
-      <nav aria-label="...">
-        <ul className="pagination">
-          <li className="page-item disabled">
-            <span className="page-link">First</span>
-          </li>
-          <li className="page-item">
-            <span className="page-link">&lt;</span>
-          </li>
+      <div id="pagination" class="container d-flex justify-content-center">
+        <nav aria-label="...">
+          <ul className="pagination">
+            <li className="page-item disabled">
+              <span className="page-link">First</span>
+            </li>
+            <li className="page-item">
+              <span className="page-link">&lt;</span>
+            </li>
 
-          {/* page numbers */}
-          {/*
+            {/* page numbers */}
+            {/*
         <li className="page-item">
           <a className="page-link" href="/">
             1
@@ -56,21 +67,22 @@ class Pagination extends Component {
         </li>
       */}
 
-          {renderPagination()}
+            {renderPagination()}
 
-          {/* next last */}
-          <li className="page-item">
-            <a className="page-link" href="/">
-              &gt;
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="/">
-              Last
-            </a>
-          </li>
-        </ul>
-      </nav>
+            {/* next last */}
+            <li className="page-item">
+              <a className="page-link" href="/">
+                &gt;
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="/">
+                Last
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   }
 }
