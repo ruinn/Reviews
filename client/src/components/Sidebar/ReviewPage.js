@@ -4,9 +4,11 @@ import ReviewCard from './ReviewCard';
 class ReviewPage extends Component {
   render() {
     const { reviewSnippet } = this.props;
-    return reviewSnippet.map(props => (
-      <ReviewCard key={props._id} {...props} />
-    ));
+    return (
+      <div id="allReviews">
+        {reviewSnippet.map(props => <ReviewCard key={props._id} {...props} />)}
+      </div>
+    );
   }
 }
 

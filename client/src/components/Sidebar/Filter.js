@@ -35,14 +35,15 @@ class SidebarFilter extends Component {
   render() {
     console.log('this.props.sortBy', this.props.sortBy);
     return (
-      <div>
+      <div className="row" id="filter">
         {/* Language filter */}
-        <div>
-          <p>SHOW:</p>
+        <div className="col-md-6 form-group">
+          <label>SHOW:</label>
           <select
             name="show"
             id="show"
             onChange={e => this.handleLanguageChange(e)}
+            className="form-control"
           >
             <option value="english">English Reviews</option>
             <option value="allLanguages">All languages</option>
@@ -50,13 +51,14 @@ class SidebarFilter extends Component {
         </div>
 
         {/* Sort-by fiter */}
-        <div>
-          <p>SORT BY:</p>
+        <div className="col-md-6 form-group">
+          <label>SORT BY:</label>
           <select
             name="sortBy"
             id="sortBy"
             value={this.props.sortBy}
             onChange={e => this.handleSortByChange(e)}
+            className="form-control"
           >
             <option value="topRated">Top Rated</option>
             <option value="lowestRated">Lowest Rated</option>

@@ -3,8 +3,8 @@ import RankedRating from '../ReviewsAndRating/RankedRating';
 import RatingSummary from '../ReviewsAndRating/RatingSummary';
 
 const SidebarRankedRating = () => [
-  <RatingSummary key="ratingSummary" />,
-  <RankedRating key="rankedRating" />,
+  <RatingSummary key="ratingSummary" sidebar={true}/>,
+  <RankedRating key="rankedRating" sidebar={true}/>,
 ];
 
 export default SidebarRankedRating;
