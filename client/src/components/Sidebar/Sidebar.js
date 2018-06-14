@@ -11,7 +11,7 @@ const Sidebar = () => (
       <div className="text-center" />
       <div
         className="modal left fade show"
-        id="exampleModal"
+        id="sidebarModal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"

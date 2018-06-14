@@ -37,7 +37,7 @@ class Pagination extends Component {
       return pagination;
     };
     return (
-      <div id="pagination" class="container d-flex justify-content-center">
+      <div id="pagination" className="container d-flex justify-content-center">
         <nav aria-label="...">
           <ul className="pagination">
             <li className="page-item disabled">

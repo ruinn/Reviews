@@ -22,7 +22,7 @@ class ReadAllReviewsButton extends Component {
           type="button"
           className="btn btn-readAllReviews px-3"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target="#sidebarModal"
           onClick={() => this.handleOnClick()}
           id="readAllReviewsBtn"
         >
