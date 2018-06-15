@@ -90,7 +90,9 @@ $SECTION_PADDING: 40px;
 
       #ratingSummary {
         color: $MAIN_COLOR;
-        border-bottom: 1px $BORDER_COLOR solid;
+        padding-bottom: 15px;
+        // border-bottom: 1px $BORDER_COLOR solid;
+        margin: 20px 0;
 
         .ratingLabel {
           color: $MAIN_COLOR;
@@ -103,6 +105,8 @@ $SECTION_PADDING: 40px;
       #rankedRating {
         font-size: 12.8px;
         line-height: 19.2px;
+        border-bottom: 1px $BORDER_COLOR solid;
+        border-top: 1px $BORDER_COLOR solid;
         color: $GREY_DARKER;
 
         .rating {
