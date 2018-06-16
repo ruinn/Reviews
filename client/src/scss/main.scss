@@ -18,13 +18,16 @@ $SECTION_PADDING: 40px;
   font-family: "Noto",Helvetica,Arial,sans-serif;
   font-size: $font_size;
 
+    .close {
+      box-shadow: none;
+      outline: none;
+    }
+
     .container-fluid {
       max-width: 90vw;
     }
 
-    .border-top-gray {
-      border-top: 1px $BORDER_COLOR solid;
-    }
+
 
     .header {
       font-size: $HEADER_FONT_SIZE;
@@ -54,32 +57,11 @@ $SECTION_PADDING: 40px;
     //   padding: 0;
     // }
 
-    #latestReviews {
-      .ratingLabel {
-        color: $MAIN_COLOR;
-        line-height: 12.8px;
-        font-weight: 700;
-      }
-
-      #readAllReviews {
-        .btn-readAllReviews {
-            font-size: 14.4px;
-            border-radius: 0.188rem;
-            color: $MAIN_COLOR;
-            background-color: $WHITE;
-            border-color: $MAIN_COLOR; /*set the color you want here*/
-        }
-        .btn-readAllReviews:hover, .btn-readAllReviews:focus, .btn-readAllReviews:active, .btn-readAllReviews.active, .open>.dropdown-toggle.btn-readAllReviews {
-            color: $WHITE;
-            background-color: $MAIN_COLOR;
-            border-color: $MAIN_COLOR; /*set the color you want here*/
-        }
-      }
-    }
-
-
     #reviewsAndRatings {
       padding: $SECTION_PADDING 0;
+      .btn {
+        cursor: default;
+      }
 
       .progress {
         height: 6px;
@@ -97,6 +79,7 @@ $SECTION_PADDING: 40px;
         .ratingLabel {
           color: $MAIN_COLOR;
           line-height: 12.8px;
+          margin-bottom: 5px;
           font-weight: 700;
           font-size: 19.2px;
         }
@@ -106,7 +89,9 @@ $SECTION_PADDING: 40px;
         font-size: 12.8px;
         line-height: 19.2px;
         border-bottom: 1px $BORDER_COLOR solid;
-        border-top: 1px $BORDER_COLOR solid;
+        border-top: 1px rgba($BORDER_COLOR,0.5) dashed;
+        padding-top: 30px;
+        padding-bottom: 30px;
         color: $GREY_DARKER;
 
         .rating {
@@ -156,10 +141,76 @@ $SECTION_PADDING: 40px;
       }
     }
 
+
+
+    #latestReviews {
+
+      .ratingLabel {
+        color: $MAIN_COLOR;
+        line-height: 12.8px;
+        font-weight: 700;
+      }
+
+      .header {
+        margin-bottom: 30px;
+      }
+
+      #top4Reviews {
+        .btn {
+            cursor: default;
+          }
+        .border-top-gray {
+          margin-top: 15px;
+          border-top: 1px $BORDER_COLOR dashed;
+          padding-top: 15px;
+        }
+
+        .top4Reviews-text {
+          margin-top: 15px;
+          // overflow: hidden;
+          // span  {
+            // height: 6.0rem; /* exactly 5 lines */
+            // text-overflow: -o-ellipsis-lastline;
+          // }
+          // span {
+          //   height: auto;
+          // }
+          // span {
+          //     white-space: nowrap;
+          //     overflow: hidden;
+          //     text-overflow: ellipsis;
+          //     display: inline-block;
+          //     max-width: 100%;
+          // }
+        }
+      }
+
+      #readAllReviews {
+        margin-top: 30px;
+        margin-bottom: 50px;
+
+        .btn-readAllReviews {
+            font-size: 14.4px;
+            border-radius: 0.188rem;
+            color: $MAIN_COLOR;
+            box-shadow: none;
+            background-color: $WHITE;
+            border-color: $MAIN_COLOR; /*set the color you want here*/
+        }
+        .btn-readAllReviews:hover, .btn-readAllReviews:focus, .btn-readAllReviews:active, .btn-readAllReviews.active, .open>.dropdown-toggle.btn-readAllReviews {
+            color: $WHITE;
+            background-color: $MAIN_COLOR;
+            border-color: $MAIN_COLOR; /*set the color you want here*/
+        }
+      }
+    }
+
+
     #sidebar {
       // .modal {
       //   display:block !important;
       // }
+
       .modal-dialog {
         width: 1000px !important;
       }
@@ -177,6 +228,11 @@ $SECTION_PADDING: 40px;
       .modal.left .modal-content {
         height: 100%;
         overflow-y: auto;
+      }
+
+      .modal-header {
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       .modal.left .modal-body {
@@ -202,25 +258,53 @@ $SECTION_PADDING: 40px;
         background-color: $MAIN_COLOR;
       }
 
-      #ratingSummary {
-        color: $MAIN_COLOR;
-        border-bottom: 1px $BORDER_COLOR solid;
-
-        .ratingLabel {
+      #sidebarHeader {
+        #guideLines {
           color: $MAIN_COLOR;
-          line-height: 12.8px;
-          font-weight: 700;
-          font-size: 19.2px;
+          div {
+            margin-top: 15px;
+            margin-bottom: 15px;
+          }
         }
       }
 
-      #rankedRating {
-        font-size: 12.8px;
-        line-height: 19.2px;
-        color: $GREY_DARKER;
+      #sidebarRankedRating {
+        border-bottom: 1px $BORDER_COLOR solid;
+        border-top: 1px $BORDER_COLOR solid;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        margin-top: 30px;
+        margin-bottom: 30px;
 
-        .rating {
-          font-weight: 700;
+        #ratingSummary {
+          .btn {
+            cursor: default;
+          }
+          color: $MAIN_COLOR;
+          margin-bottom: 20px;
+
+          .ratingLabel {
+            color: $MAIN_COLOR;
+            line-height: 12.8px;
+            margin-bottom: 4px;
+            font-weight: 700;
+            font-size: 19.2px;
+          }
+
+          #ratingSummary-sidebar {
+            color: #333;
+            font-size: 10.4px;
+          }
+        }
+
+        #rankedRating {
+          font-size: 12.8px;
+          line-height: 19.2px;
+          color: $GREY_DARKER;
+
+          .rating {
+            font-weight: 700;
+          }
         }
       }
 
@@ -236,6 +320,9 @@ $SECTION_PADDING: 40px;
         }
       }
       .review-card {
+        .btn {
+          cursor: default;
+        }
         border-bottom: 1px $BORDER_COLOR solid;
         // padding-bottom: 50px;
         .user-detail {

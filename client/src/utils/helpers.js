@@ -13,3 +13,9 @@ export const getAgeGroup = age => {
   if (age>=25) return '25-30';
   return '18-24';
 };
+
+export const getTravelerType = numOfReviews => {
+  if (numOfReviews >= 25) return 'Globetrotter';
+  if (numOfReviews>10) return 'Avid Traveller';
+  return 'Novice Nomad';
+}

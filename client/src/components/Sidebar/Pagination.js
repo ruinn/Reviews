@@ -25,12 +25,12 @@ class Pagination extends Component {
         }
         pagination.push(
           <li className={classname} key={i}>
-            <a
+            <span
               className="page-link"
               onClick={() => fetchReviewsOnPage(i, hostelId, sortBy, isEnglish)}
             >
               {i}
-            </a>
+            </span>
           </li>
         );
       }
@@ -40,11 +40,36 @@ class Pagination extends Component {
       <div id="pagination" className="container d-flex justify-content-center">
         <nav aria-label="...">
           <ul className="pagination">
-            <li className="page-item disabled">
-              <span className="page-link">First</span>
+            <li
+              className={`page-item ${this.props.currentPageIndex === 1 &&
+                ' disabled'}`}
+            >
+              <span
+                className="page-link"
+                onClick={() =>
+                  fetchReviewsOnPage(1, hostelId, sortBy, isEnglish)
+                }
+              >
+                First
+              </span>
             </li>
-            <li className="page-item">
-              <span className="page-link">&lt;</span>
+            <li
+              className={`page-item ${this.props.currentPageIndex <= 1 &&
+                ' disabled'}`}
+            >
+              <span
+                className="page-link"
+                onClick={() =>
+                  fetchReviewsOnPage(
+                    this.props.currentPageIndex - 1,
+                    hostelId,
+                    sortBy,
+                    isEnglish
+                  )
+                }
+              >
+                &lt;
+              </span>
             </li>
 
             {/* page numbers */}
@@ -70,15 +95,41 @@ class Pagination extends Component {
             {renderPagination()}
 
             {/* next last */}
-            <li className="page-item">
-              <a className="page-link" href="/">
+            <li
+              className={`page-item ${this.props.currentPageIndex ===
+                this.props.maxPageIndex && ' disabled'}`}
+            >
+              <span
+                className="page-link"
+                onClick={() =>
+                  fetchReviewsOnPage(
+                    this.props.currentPageIndex + 1,
+                    hostelId,
+                    sortBy,
+                    isEnglish
+                  )
+                }
+              >
                 &gt;
-              </a>
+              </span>
             </li>
-            <li className="page-item">
-              <a className="page-link" href="/">
+            <li
+              className={`page-item ${this.props.currentPageIndex ===
+                this.props.maxPageIndex && ' disabled'}`}
+            >
+              <span
+                className="page-link"
+                onClick={() =>
+                  fetchReviewsOnPage(
+                    this.props.maxPageIndex,
+                    hostelId,
+                    sortBy,
+                    isEnglish
+                  )
+                }
+              >
                 Last
-              </a>
+              </span>
             </li>
           </ul>
         </nav>
@@ -93,7 +144,7 @@ const mapStateToProps = ({ sidebarReducer, overviewReviews }) => ({
   sortBy: sidebarReducer.sortBy,
   isEnglish: sidebarReducer.isEnglish,
   currentPageIndex: sidebarReducer.pageNum,
-  hostelId: overviewReviews._id
+  hostelId: overviewReviews.id
 });
 
 export default connect(

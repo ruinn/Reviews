@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
-import { getRatingLabel, getAgeGroup } from '../../utils/helpers';
+import { getRatingLabel, getAgeGroup, getTravelerType } from '../../utils/helpers';
 
 const ReviewCard = ({
   text,
@@ -8,7 +8,8 @@ const ReviewCard = ({
   propertyResponse,
   age,
   created_at,
-  rate
+  rate,
+  numOfReviews
 }) => {
   return (
     <div className="row my-5 review-card pb-5">
@@ -21,8 +22,10 @@ const ReviewCard = ({
           <em>{username}</em>
         </div>
         <div>{getAgeGroup(age)}</div>
-        <div class="travelerType">Novice Nomad</div>
-        <div class="numOfReviews moreThan1Reviews">10 reviews</div>
+        <div class="travelerType">{getTravelerType(numOfReviews)}</div>
+        <div class="numOfReviews moreThan1Reviews">
+          {numOfReviews} review{numOfReviews > 1 && 's'}
+        </div>
       </div>
 
       {/* user comment half */}

@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import { getRatingLabel, getAgeGroup} from '../../utils/helpers';
+import { getRatingLabel, getAgeGroup } from '../../utils/helpers';
 
 const Top4Reviews = ({ reviews }) => {
   return (
-    <div className="row">
+    <div className="row" id="top4Reviews">
       {reviews.map(({ _id, rate, text, created_at, user }) => (
         <div key={_id} className="col-md-3">
           <div className="row">
@@ -22,11 +22,16 @@ const Top4Reviews = ({ reviews }) => {
               {Moment(created_at).format('DD MMM YYYY')}
             </div>
           </div>
-          <div>{text}</div>
+          <div className="top4Reviews-text top4Reviews-truncate">
+            <span>{text}</span>
+          </div>
+          <div>Show more</div>
 
           <div className="row">
-            <div className="col border-top-gray">
-              {user.country}, {user.status}, {getAgeGroup(user.age)}
+            <div className="col">
+              <div className="border-top-gray">
+                {user.country}, {user.status}, {getAgeGroup(user.age)}
+              </div>
             </div>
           </div>
         </div>

@@ -13,13 +13,15 @@ const getArrayOfUsers = (size = 50) => {
     'Australia',
     'Chile',
     'Thailand',
-    'South Korea',
+    'Belarus',
     'Canada',
     'South Africa',
     'Vietnam',
     'Kazakhstan',
     'Japan',
     'Kenya',
+    'Mexico',
+    'Iran'
   ];
 
   for (let i = 0; i < size; i++) {
@@ -30,7 +32,12 @@ const getArrayOfUsers = (size = 50) => {
     user.username = faker.internet.userName();
     user.age = 18 + Math.floor(Math.random() * 40);
     user.email = faker.internet.email();
-    user.status = faker.random.arrayElement(['Female', 'Male', 'Mixed Group', 'Couple']);
+    user.status = faker.random.arrayElement([
+      'Female',
+      'Male',
+      'Mixed Group',
+      'Couple'
+    ]);
     user.created_at = new Date(faker.date.between('2000-01-01', '2018-01-01'));
     user.country = countryBank[Math.floor(Math.random() * countryBank.length)];
     ans.push(user);
@@ -51,7 +58,7 @@ async function generateUserDb(rawData) {
 
     // ADDED NEW USERS TO DATABASE
     const allPromises = [];
-    rawData.forEach((rawUser) => {
+    rawData.forEach(rawUser => {
       const newUser = new User(rawUser);
       allPromises.push(newUser.save());
     });

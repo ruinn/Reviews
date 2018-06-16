@@ -1,14 +1,16 @@
 import React from 'react';
 
 const TheRestOfCountries = ({ countries }) => (
-  <div>
-    <div className="other-country d-flex flex-column justify-content-center">
+  <div className="other-country-block">
+    <div className="other-country d-flex flex-column justify-content-center mx-auto">
       <div className="other-country-flag btn">
         <i className="fa fa-flag" aria-hidden="true" />
       </div>
     </div>
-    <div className="country-name">Other</div>
-    <div className="country-visit">{countries.length} Other nationalities</div>
+    <div className="country-name text-center">Other</div>
+    <div className="country-visit text-center">
+      {countries.length} Other nationalities
+    </div>
   </div>
 );
 

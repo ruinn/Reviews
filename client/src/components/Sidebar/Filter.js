@@ -77,7 +77,7 @@ class SidebarFilter extends Component {
 const mapStateToProps = ({ sidebarReducer, overviewReviews }) => ({
   sortBy: sidebarReducer.sortBy,
   isEnglish: sidebarReducer.isEnglish,
-  hostelId: overviewReviews._id
+  hostelId: overviewReviews.id
 });
 export default connect(
   mapStateToProps,

@@ -30,6 +30,7 @@ const getArrayOfHostels = (size = 100) => {
 
   for (let i = 0; i < size; i++) {
     const hostel = {};
+    hostel.id = i+1;
     hostel.name = faker.random.arrayElement([
       faker.company.companyName(),
       faker.address.county(),

@@ -14,7 +14,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchOverviewReviews('5b1a77d5180c7f989ed68a3b');
+    console.log('window.location.pathname:', window.location.pathname);
+    let hostelId = window.location.pathname.length > 1 ? window.location.pathname.split('/')[1] : 1;
+    this.props.fetchOverviewReviews(hostelId);
   }
 
   render() {
@@ -25,14 +27,15 @@ class App extends Component {
         <ReviewsAndRatings />
         <LatestReviews />
       </div>
-    );s
+    );
+    s;
   }
 }
 
 App.propTypes = {
-  fetchOverviewReviews: PropTypes.func.isRequired,
+  fetchOverviewReviews: PropTypes.func.isRequired
 };
 export default connect(
   null,
-  { fetchOverviewReviews },
+  { fetchOverviewReviews }
 )(App);
