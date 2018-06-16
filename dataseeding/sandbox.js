@@ -1,6 +1,5 @@
 const faker = require('faker');
-
-// console.log(faker.hacker.phrase());
-
-console.log;
-// console.log(faker.lorem.paragraphs(faker.random.number({ min: 1, max: 3 }), "\n \r")
+const mongoose = require('mongoose');
+let i = 2;
+console.log(new mongoose.mongo.ObjectId(i));
+console.log(new mongoose.mongo.ObjectId(2).toString());

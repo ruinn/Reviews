@@ -26,11 +26,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '../public/')));
+app.use('/:id', express.static(path.join(__dirname, '../public/')));
 
 app.get('/api/reviews/:hostelId/all', async (req, res) => {
   try {
     const NUM_OF_REVIEWS_PER_PAGE = 10;
-    const { hostelId } = req.params;
+    let { hostelId } = req.params;
     const pageNum = req.query.pageNum || 1;
     const english = req.query.eng || 'true';
     console.log('english?', english);
@@ -63,6 +64,9 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
         break;
     }
     console.log('hostelId', hostelId);
+
+    let hostelIdString = await Hostel.findOne({ id: hostelId });
+    hostelId = hostelIdString._id.toString();
     console.log('pageNum', pageNum);
     console.log('sortBy', sortBy);
 
@@ -101,7 +105,8 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
           language: { $push: '$language' },
           rate: { $push: '$rate' },
           age: { $push: '$userInfo.age' },
-          username: { $push: '$userInfo.username' }
+          username: { $push: '$userInfo.username' },
+          arrOfReviews: { $push: '$userInfo.reviews' }
         }
       },
       { $unwind: '$age' },
@@ -110,7 +115,8 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
       { $unwind: '$propertyResponse' },
       { $unwind: '$language' },
       { $unwind: '$rate' },
-      { $unwind: '$username' }
+      { $unwind: '$username' },
+      { $unwind: '$arrOfReviews' }
     ])
       .sort({ ...sortBy })
       .match({ ...languageMatch });
@@ -119,6 +125,11 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
 
     const startPoint = (pageNum - 1) * NUM_OF_REVIEWS_PER_PAGE;
     const endPoint = startPoint + NUM_OF_REVIEWS_PER_PAGE;
+    let reviewSnippet = reviews.slice(startPoint, endPoint);
+    reviewSnippet.forEach(obj => {
+      obj.numOfReviews = obj.arrOfReviews.length
+      delete obj.arrOfReviews;
+    })
     res.json({
       total: reviews.length,
       reviewSnippet: reviews.slice(startPoint, endPoint)
@@ -132,7 +143,7 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
 app.get('/api/reviews/overview/:hostelId', async (req, res) => {
   try {
     const { hostelId } = req.params;
-    let data = await Hostel.findById(hostelId).populate({
+    let data = await Hostel.findOne({ id: hostelId }).populate({
       path: 'reviews',
       // options: { limit: 3, sort: { created_at: -1 } },
       options: { sort: { rate: -1 } },
@@ -166,6 +177,12 @@ app.get('/api/reviews/overview/:hostelId', async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error });
   }
+});
+
+app.get('/:id', (req, res) => {
+  const { id } = req.params;
+  console.log('id', id);
+  app.use(express.static(path.join(__dirname, '../public/')));
 });
 
 app.listen(PORT, () => console.log('Server running on port', PORT));

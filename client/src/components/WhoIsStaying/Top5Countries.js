@@ -6,10 +6,14 @@ import CountryFlag from './CountryFlag';
 // </div>
 const Top5Countries = ({ countries }, index) => {
   return countries.map(([country, visit]) => (
-    <div key={country}>
-      <CountryFlag name={country} />
-      <div className="country-name">{country}</div>
-      <div className="country-visit">{visit > 5 ? visit - (visit % 5) : 1}+ Guests</div>
+    <div key={country} className="country-block">
+      <div className="text-center">
+        <CountryFlag name={country} />
+      </div>
+      <div className="country-name   text-center">{country}</div>
+      <div className="country-visit  text-center">
+        {visit > 5 ? visit - (visit % 5) : 1}+ Guests
+      </div>
     </div>
   ));
 };

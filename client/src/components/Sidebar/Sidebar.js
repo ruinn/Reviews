@@ -27,7 +27,7 @@ const Sidebar = () => (
                 <ReviewPage />
               </div>
             </div>
-            <div class="modal-footer pt-5">
+            <div className="modal-footer pt-5">
               <div className="container">
                 <Pagination />
               </div>

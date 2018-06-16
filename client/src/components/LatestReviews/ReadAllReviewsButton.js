@@ -10,9 +10,7 @@ import {
 class ReadAllReviewsButton extends Component {
   handleOnClick() {
     const { hostelId, isEnglish, sortBy } = this.props;
-    // this.props.openSidebarAndFetchFullReviews(hostelId, isEnglish, sortBy, 1);
     this.props.fetchReviewsOnPage(1, hostelId, sortBy, isEnglish);
-    // this.props.openSidebar();
   }
 
   render() {
@@ -35,11 +33,11 @@ class ReadAllReviewsButton extends Component {
 
 ReadAllReviewsButton.propTypes = {
   openSidebarAndFetchFullReviews: PropTypes.func.isRequired,
-  hostelId: PropTypes.string.isRequired
+  hostelId: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ overviewReviews, sidebarReducer }) => ({
-  hostelId: overviewReviews._id || '',
+  hostelId: overviewReviews.id || '',
   isEnglish: sidebarReducer.isEnglish,
   sortBy: sidebarReducer.sortBy
 });
