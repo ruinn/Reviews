@@ -13,10 +13,10 @@ export const fetchReviewsOnPage = (
   sortBy,
   isEnglish
 ) => dispatch => {
-  const url = `http://localhost:3004/api/reviews/${hostelId}/all?pageNum=${pageNumber}&eng=${isEnglish}&sortBy=${sortBy}`;
-  console.log(url);
+  const url = `/api/reviews/${hostelId}/all?pageNum=${pageNumber}&eng=${isEnglish}&sortBy=${sortBy}`;
+  // console.log(url);
   axios.get(url).then(res => {
-    console.log('res.data', res.data);
+    // console.log('res.data', res.data);
 
     dispatch({
       type: FETCH_REVIEWS_ON_PAGE,

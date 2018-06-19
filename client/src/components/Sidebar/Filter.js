@@ -33,7 +33,6 @@ class SidebarFilter extends Component {
   }
 
   render() {
-    console.log('this.props.sortBy', this.props.sortBy);
     return (
       <div className="row" id="filter">
         {/* Language filter */}

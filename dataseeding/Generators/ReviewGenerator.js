@@ -12,19 +12,31 @@ const getArrayOfRawReviews = (size = 1000) => {
 
   for (let i = 0; i < size; i++) {
     const review = {};
-    review.text = faker.lorem.paragraphs(faker.random.number({ min: 1, max: 2 }), '\n \r');
-    review.rate = Math.round(7 + Math.random() * 3 * 10) / 10;
-    review.language = faker.random.arrayElement(['ENG', 'ENG', 'ENG', 'ENG', 'OTH']);
+    review.text = faker.lorem.paragraphs(
+      faker.random.number({ min: 1, max: 2 }),
+      '\n \r'
+    );
+    // review.rate = Math.round(7 + Math.random() * 3 * 10) / 10;
+    review.rate = Math.round((7 + Math.random() * 3) * 10) / 10;
+    review.language = faker.random.arrayElement([
+      'ENG',
+      'ENG',
+      'ENG',
+      'ENG',
+      'OTH'
+    ]);
     review.created_at = faker.date.between('2016-01-01', '2018-01-01');
     review.propertyResponse =
-      Math.random() < 0.4 ? null : faker.lorem.sentences(faker.random.number({ min: 1, max: 2 }));
+      Math.random() < 0.4
+        ? null
+        : faker.lorem.sentences(faker.random.number({ min: 1, max: 2 }));
     ans.push(review);
   }
 
   return ans;
 };
 
-const generateReviewData = async (rawData) => {
+const generateReviewData = async rawData => {
   try {
     const db = await mongoose.connect(MONGO_URI);
     console.log('Connected to database');
@@ -40,16 +52,18 @@ const generateReviewData = async (rawData) => {
     const hotelDocuments = await Hostel.find({});
     const userDocuments = await User.find({});
 
-    const updatedRawData = rawData.map((eachReview) => {
+    const updatedRawData = rawData.map(eachReview => {
       const updatedReview = Object.assign({}, eachReview);
-      const hostelIdObj = hotelDocuments[Math.floor(Math.random() * hotelDocuments.length)]._id;
+      const hostelIdObj =
+        hotelDocuments[Math.floor(Math.random() * hotelDocuments.length)]._id;
       updatedReview.hostel = hostelIdObj;
-      const userIdObj = userDocuments[Math.floor(Math.random() * userDocuments.length)]._id;
+      const userIdObj =
+        userDocuments[Math.floor(Math.random() * userDocuments.length)]._id;
       updatedReview.user = userIdObj;
       return updatedReview;
     });
 
-    updatedRawData.forEach((rawReview) => {
+    updatedRawData.forEach(rawReview => {
       const newReview = new Review(rawReview);
       allPromises.push(newReview.save());
     });
@@ -58,7 +72,7 @@ const generateReviewData = async (rawData) => {
 
     const allUserPromises = [];
     const allHostelPromises = [];
-    allNewReviews.forEach((newReview) => {
+    allNewReviews.forEach(newReview => {
       const userId = newReview.user.toString();
       allUserPromises.push(User.findById(userId));
 

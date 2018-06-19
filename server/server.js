@@ -106,7 +106,9 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
           rate: { $push: '$rate' },
           age: { $push: '$userInfo.age' },
           username: { $push: '$userInfo.username' },
-          arrOfReviews: { $push: '$userInfo.reviews' }
+          arrOfReviews: { $push: '$userInfo.reviews' },
+          country: { $push: '$userInfo.country' },
+          status: { $push: '$userInfo.status' },
         }
       },
       { $unwind: '$age' },
@@ -116,7 +118,9 @@ app.get('/api/reviews/:hostelId/all', async (req, res) => {
       { $unwind: '$language' },
       { $unwind: '$rate' },
       { $unwind: '$username' },
-      { $unwind: '$arrOfReviews' }
+      { $unwind: '$arrOfReviews' },
+      { $unwind: '$country' },
+      { $unwind: '$status' }
     ])
       .sort({ ...sortBy })
       .match({ ...languageMatch });

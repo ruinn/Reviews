@@ -15,6 +15,7 @@ $REVIEW_RATING_FONT_SIZE: 16px;
 $SECTION_PADDING: 40px;
 
 #reviews {
+  overflow-x: hidden;
   font-family: "Noto",Helvetica,Arial,sans-serif;
   font-size: $font_size;
 
@@ -102,7 +103,9 @@ $SECTION_PADDING: 40px;
 
     #whosStaying {
       background-color: #F4F4F4;
-      padding: $SECTION_PADDING 0;
+      // padding: $SECTION_PADDING 0;
+      padding-top: 20px;
+      color: #444;
       .btn-new {
         color: $WHITE;
         background: $MAIN_COLOR;
@@ -162,7 +165,7 @@ $SECTION_PADDING: 40px;
         .border-top-gray {
           margin-top: 15px;
           border-top: 1px $BORDER_COLOR dashed;
-          padding-top: 15px;
+          padding-top: 4px;
         }
 
         .top4Reviews-text {
@@ -211,13 +214,26 @@ $SECTION_PADDING: 40px;
       //   display:block !important;
       // }
 
-      .modal-dialog {
-        width: 1000px !important;
+      #sidebar-navbar {
+        border: none;
+        position: fixed;
+        overflow: hidden;
+        top: 0;
+        z-index: 1;
+        color: #444;
       }
+
+      .modal-content {
+        border: none;
+      }
+      .modal-dialog {
+        width: 100%;
+      }
+
       .modal.left .modal-dialog {
         position: fixed;
         margin: auto;
-        width: 2000px;
+        // width: 2000px;
         height: 100%;
         -webkit-transform: translate3d(0%, 0, 0);
         -ms-transform: translate3d(0%, 0, 0);
@@ -259,6 +275,12 @@ $SECTION_PADDING: 40px;
       }
 
       #sidebarHeader {
+        .navbar {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          background-color: #fff;
+          box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+        }
         #guideLines {
           color: $MAIN_COLOR;
           div {
@@ -328,11 +350,22 @@ $SECTION_PADDING: 40px;
         .user-detail {
           color: $USER_DETAIL_COLOR;
           font-size: $USER_DETAIL_FONT_SIZE;
+          padding-bottom: 15px;
           .user-avatar {
             font-size: 40px;
           }
           .moreThan1Reviews {
             color: $MAIN_COLOR;
+          }
+
+          @media only screen and (max-width: 40.063em) {
+            .user-detail_user-info div {
+              display: inline;
+            }
+            .user-detail_user-avatar {
+              padding-left: 0;
+            }
+
           }
         }
 
@@ -353,6 +386,12 @@ $SECTION_PADDING: 40px;
             padding: 20px;
             background: $REVIEW_DETAIL__PROPERTY-RESPONSE-COLOR;
             border-radius: .02em;
+
+          }
+          @media only screen and (max-width: 40.063em) {
+            .review-property-response {
+              padding: 10px;
+          }
           }
 
           .review-property-response:after {
@@ -401,6 +440,21 @@ $SECTION_PADDING: 40px;
         .page-link {
           // background-color: $MAIN_COLOR;
           color: $MAIN_COLOR;
+        }
+
+        #pagination-mobile {
+          .btn-pagination {
+            cursor: default;
+            color: $MAIN_COLOR;
+            border-color: $MAIN_COLOR;
+            font-weight: 700;
+          }
+          .page-item {
+            border: none;
+          }
+          .page-link {
+            border: none;
+          }
         }
       }
 

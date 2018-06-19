@@ -14,7 +14,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('window.location.pathname:', window.location.pathname);
     let hostelId = window.location.pathname.length > 1 ? window.location.pathname.split('/')[1] : 1;
     this.props.fetchOverviewReviews(hostelId);
   }

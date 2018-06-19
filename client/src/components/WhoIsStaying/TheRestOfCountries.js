@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TheRestOfCountries = ({ countries }) => (
-  <div className="other-country-block">
+  <div className="other-country-block col-md-2 col-6">
     <div className="other-country d-flex flex-column justify-content-center mx-auto">
       <div className="other-country-flag btn">
         <i className="fa fa-flag" aria-hidden="true" />

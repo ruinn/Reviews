@@ -16,118 +16,137 @@ class Pagination extends Component {
     // action props
     const { fetchReviewsOnPage } = this.props;
 
+    const handleFetchPrevPage = () => {
+      fetchReviewsOnPage(currentPageIndex - 1, hostelId, sortBy, isEnglish);
+    };
+
+    const handleFetchNextPage = () => {
+      fetchReviewsOnPage(currentPageIndex + 1, hostelId, sortBy, isEnglish);
+    };
+
+    const handleFetchFirstPage = () => {
+      fetchReviewsOnPage(1, hostelId, sortBy, isEnglish);
+    };
+
+    const handleFetchLastPage = () => {
+      fetchReviewsOnPage(maxPageIndex, hostelId, sortBy, isEnglish);
+    };
+
     const renderPagination = () => {
       let pagination = [];
-      for (let i = minPageIndex; i <= maxPageIndex; i++) {
-        let classname = 'page-item';
-        if (i === currentPageIndex) {
-          classname += ' active';
+      const maxPageCount = maxPageIndex >= 5 ? 5 : maxPageIndex;
+      let leftPage = currentPageIndex - 1;
+      let rightPage = currentPageIndex + 1;
+      pagination.push(
+        <li className="page-item active" key={currentPageIndex}>
+          <span
+            className="page-link"
+          >
+            {currentPageIndex}
+          </span>
+        </li>
+      );
+      let pageCount = 1;
+
+      while (pageCount < maxPageCount) {
+        if (rightPage <= maxPageIndex) {
+          (rightPage => {
+            pagination.push(
+              <li className="page=item" key={rightPage}>
+                <span
+                  className="page-link"
+                  onClick={() =>
+                    fetchReviewsOnPage(rightPage, hostelId, sortBy, isEnglish)
+                  }
+                >
+                  {rightPage}
+                </span>
+              </li>
+            );
+          })(rightPage);
+          pageCount++;
+          rightPage++;
         }
-        pagination.push(
-          <li className={classname} key={i}>
-            <span
-              className="page-link"
-              onClick={() => fetchReviewsOnPage(i, hostelId, sortBy, isEnglish)}
-            >
-              {i}
-            </span>
-          </li>
-        );
+        if (leftPage >= minPageIndex) {
+          (leftPage => {
+            pagination.unshift(
+              <li className="page=item" key={leftPage}>
+                <span
+                  className="page-link"
+                  onClick={() =>
+                    fetchReviewsOnPage(leftPage, hostelId, sortBy, isEnglish)
+                  }
+                >
+                  {leftPage}
+                </span>
+              </li>
+            );
+          })(leftPage);
+          pageCount++;
+          leftPage--;
+        }
       }
       return pagination;
     };
+
+    const prevButtonClassName = `page-item ${this.props.currentPageIndex <= 1 &&
+      ' disabled'}`;
+
+    const nextButtonClassName = `page-item ${this.props.currentPageIndex ===
+      this.props.maxPageIndex && ' disabled'}`;
+
     return (
       <div id="pagination" className="container d-flex justify-content-center">
-        <nav aria-label="...">
+        {/* for mobile devices */}
+        <nav
+          aria-label="..."
+          id="pagination-mobile"
+          className="d-block d-sm-none"
+        >
           <ul className="pagination">
-            <li
-              className={`page-item ${this.props.currentPageIndex === 1 &&
-                ' disabled'}`}
-            >
+            <li className={prevButtonClassName}>
+              <a className="page-link" onClick={() => handleFetchPrevPage()}>
+                <i className="fa fa-chevron-left" aria-hidden="true" />
+              </a>
+            </li>
+            <span className="btn btn-pagination mx-2">
+              {currentPageIndex} of {maxPageIndex}
+            </span>
+            <li className={nextButtonClassName}>
+              <a className="page-link" onClick={() => handleFetchNextPage()}>
+                <i className="fa fa-chevron-right" aria-hidden="true" />
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        {/* large screen device */}
+        <nav aria-label="..." className="d-none d-sm-block">
+          <ul className="pagination">
+            <li className={prevButtonClassName}>
               <span
                 className="page-link"
-                onClick={() =>
-                  fetchReviewsOnPage(1, hostelId, sortBy, isEnglish)
-                }
+                onClick={() => handleFetchFirstPage()}
               >
                 First
               </span>
             </li>
-            <li
-              className={`page-item ${this.props.currentPageIndex <= 1 &&
-                ' disabled'}`}
-            >
-              <span
-                className="page-link"
-                onClick={() =>
-                  fetchReviewsOnPage(
-                    this.props.currentPageIndex - 1,
-                    hostelId,
-                    sortBy,
-                    isEnglish
-                  )
-                }
-              >
+            <li className={prevButtonClassName}>
+              <span className="page-link" onClick={() => handleFetchPrevPage()}>
                 &lt;
               </span>
             </li>
 
-            {/* page numbers */}
-            {/*
-        <li className="page-item">
-          <a className="page-link" href="/">
-            1
-          </a>
-        </li>
-        <li className="page-item active">
-          <span className="page-link">
-            2
-            <span className="sr-only">(current)</span>
-          </span>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="/">
-            3
-          </a>
-        </li>
-      */}
-
             {renderPagination()}
 
             {/* next last */}
-            <li
-              className={`page-item ${this.props.currentPageIndex ===
-                this.props.maxPageIndex && ' disabled'}`}
-            >
-              <span
-                className="page-link"
-                onClick={() =>
-                  fetchReviewsOnPage(
-                    this.props.currentPageIndex + 1,
-                    hostelId,
-                    sortBy,
-                    isEnglish
-                  )
-                }
-              >
+            <li className={nextButtonClassName}>
+              <span className="page-link" onClick={() => handleFetchNextPage()}>
                 &gt;
               </span>
             </li>
-            <li
-              className={`page-item ${this.props.currentPageIndex ===
-                this.props.maxPageIndex && ' disabled'}`}
-            >
-              <span
-                className="page-link"
-                onClick={() =>
-                  fetchReviewsOnPage(
-                    this.props.maxPageIndex,
-                    hostelId,
-                    sortBy,
-                    isEnglish
-                  )
-                }
-              >
+            <li className={nextButtonClassName}>
+              <span className="page-link" onClick={() => handleFetchLastPage()}>
                 Last
               </span>
             </li>

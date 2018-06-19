@@ -2,22 +2,21 @@ import React from 'react';
 
 const SidebarHeader = () => (
   <div id="sidebarHeader">
-    <div className="d-flex justify-content-between">
-      <div>
-        <h3>Reviews & Ratings</h3>
-      </div>
-
-      <div>
-        <button
-          type="button"
-          className="close"
+    <nav className="navbar navbar-expand-md fixed-top">
+      <div className="container d-flex justify-content-between">
+        <div className="navbar-brand" href="#">
+          <div className="container">Reviews & Ratings</div>
+        </div>
+        <div
+          className="close align-items-center"
           data-dismiss="modal"
           aria-label="Close"
         >
-          <span aria-hidden="true">&times;</span>
-        </button>
+          &times;
+        </div>
       </div>
-    </div>
+    </nav>
+    <div className="d-flex justify-content-between mt-5 pt-2" />
     <div>
       The rating percentage is calculated from customers who booked within the
       last 6 months. All ratings and reviews are based on the feedback and
