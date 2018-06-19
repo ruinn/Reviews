@@ -45,7 +45,11 @@ class WhoIsStaying extends Component {
             Who's staying? <span className="btn btn-sm btn-new">NEW</span>
           </div>
           <div className="row d-flex justify-content-around">
-            {renderCountryFlags(this.state.countryCount)}
+            <div className="container">
+              <div className="row py-3">
+                {renderCountryFlags(this.state.countryCount)}
+              </div>
+            </div>
           </div>
         </div>
       </div>

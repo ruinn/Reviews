@@ -14,7 +14,7 @@ const RatingSummary = ({ avgRating, totalReviewCount, sidebar }) => {
             {!sidebar && <div>Based on: {totalReviewCount} reviews</div>}
             {sidebar && (
               <div id="ratingSummary-sidebar">
-                <i class="fa fa-comment-o" aria-hidden="true" />{' '}
+                <i className="fa fa-comment-o" aria-hidden="true" />{' '}
                 {totalReviewCount} total reviews
               </div>
             )}

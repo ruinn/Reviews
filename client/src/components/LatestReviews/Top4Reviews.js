@@ -8,15 +8,13 @@ const Top4Reviews = ({ reviews }) => {
   return (
     <div className="row" id="top4Reviews">
       {reviews.map(({ _id, rate, text, created_at, user }) => (
-        <div key={_id} className="col-md-3">
+        <div key={_id} className="col-md-3 pb-5">
           <div className="row">
-            <div className="col-md-2">
-              <span className="btn btn-hostelworld btn-sm">{rate}</span>
+            <div className="col-6">
+              <span className="btn btn-hostelworld btn-sm">{rate.toFixed(1)}</span>
+              <span className="ratingLabel pl-2">{getRatingLabel(rate)}</span>
             </div>
-            <div className="col-md-4 ratingColumn">
-              <span className="ratingLabel">{getRatingLabel(rate)}</span>
-            </div>
-            <div className="col-md-6">
+            <div className="col-6 text-right">
               {' '}
               <i className="fa fa-calendar" aria-hidden="true" />{' '}
               {Moment(created_at).format('DD MMM YYYY')}
@@ -25,7 +23,6 @@ const Top4Reviews = ({ reviews }) => {
           <div className="top4Reviews-text top4Reviews-truncate">
             <span>{text}</span>
           </div>
-          <div>Show more</div>
 
           <div className="row">
             <div className="col">
