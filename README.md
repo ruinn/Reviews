@@ -1,6 +1,15 @@
-# Project Name
+# Project
+<img src="./media/logo.png" height="120px">
 
-> Project description
+Reviews miccroservice for hostel listing website
+
+## Demo
+
+### On large screen
+![Big screen](./media/bigscreenDemo.gif)
+
+### On small screen
+<img src="./media/smallscreen.gif" height="500px">
 
 ## Related Projects
 
@@ -38,5 +47,26 @@ From within the root directory:
 ```sh
 npm install -g webpack
 npm install
+```
+
+### Build
+
+From within the root directory:
+
+```sh
+npm run build
+```
+
+### Run server
+
+From within the root directory:
+
+```sh
+npm dev:server
+```
+
+For production
+```sh
+npm start
 ```
 
