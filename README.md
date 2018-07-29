@@ -9,7 +9,9 @@ Reviews miccroservice for hostel listing website
 ![Big screen](./media/bigscreenDemo.gif)
 
 ### On small screen
-<img src="./media/smallscreen.gif" height="500px">
+<img style="text-align:center" src="./media/mobileDemo.png">
+
+<img style="text-align:center" src="./media/smallscreen.gif" height="500px">
 
 ## Related Projects
 
